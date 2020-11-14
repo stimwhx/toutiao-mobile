@@ -1,3 +1,10 @@
-> 1%
-last 2 versions
-not dead
+# 这个值会被 @babel/preset-env（这个是es6转es5的） 和 Autoprefixer（添加各厂商浏览器见的前缀） 用来确定需要转译的 JavaScript 特性和需要添加的 CSS 浏览器前缀。
+# browserlist配置参考：去github上搜
+# 兼容到超过百分之1的用户使用的浏览器
+# > 1%
+# 兼容到最后的两个版本
+# last 2 versions
+# 没有死掉的
+# not dead
+Android >= 4.0
+iOS >= 8
