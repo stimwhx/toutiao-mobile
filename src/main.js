@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+//  别放了把你设置的全局引入在这里界面才能加载
+import './styles/index.less'
 // 导入vant 组件库ui
 import Vant from 'vant'
 // 导入vant组件库的样式

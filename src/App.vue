@@ -10,6 +10,8 @@
     <div style="pading: 30px" class="box" >
      hello
     </div>
+    <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
+    <i class="toutiao toutiao-fenxiang"></i>
   </div>
 </template>
 <script>
