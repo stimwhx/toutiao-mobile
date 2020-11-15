@@ -5,11 +5,11 @@
       <!--子路由出口-->
       <!--底部导行栏-->
       <!--这里用到的是路由嵌套，父子路由-->
-      <van-tabbar v-model="active">
-        <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-        <van-tabbar-item icon="search">问答</van-tabbar-item>
-        <van-tabbar-item icon="friends-o">视频</van-tabbar-item>
-        <van-tabbar-item icon="setting-o">我的</van-tabbar-item>
+      <van-tabbar v-model="active" route>
+        <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
+        <van-tabbar-item icon="comment-o" to="/qa">问答</van-tabbar-item>
+        <van-tabbar-item icon="video-o" to="/video">视频</van-tabbar-item>
+        <van-tabbar-item icon="user-o" to="/my">我的</van-tabbar-item>
       </van-tabbar>
       <!--底部导行栏-->
     </div>
