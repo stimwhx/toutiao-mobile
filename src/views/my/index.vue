@@ -80,7 +80,8 @@
       <van-cell title="消息通知" is-link to="/"/>
       <van-cell class="mb-4" title="小智同学" is-link to="/" />
       <!--判断有这个本地有这个user我们就显示登录，没有就不显示-->
-      <van-cell v-if="user" class="logout-cell" title="退出登录" is-link to="/" />
+      <!--is-link to="/"-->
+      <van-cell v-if="user" class="logout-cell" title="退出登录"  @click="onLogout"/>
     </div>
 </template>
 <script>
@@ -100,7 +101,22 @@ import { mapState } from 'vuex'
         },
         mounted () {
         },
-        methods: {}
+        methods: {
+          onLogout () {
+            this.$dialog.confirm({
+              title: '退出登录',
+              message: '确认退出么！！'
+            })
+              .then(() => { // 确认走这里
+                // 确认退出了我们就走这里，这时我们要把登录状态给清空
+                this.$store.commit('setUser', null)
+                // on confirm
+              })
+              .catch(() => {
+                // on cancel
+              })
+          }
+        }
     }
 </script>
 
