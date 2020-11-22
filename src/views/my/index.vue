@@ -2,6 +2,7 @@
     <div class="my-container">
       <!--Cell 单元格-->
       <van-cell-group
+        v-if="user"
         class="my-info">
         <van-cell
           title="123"
@@ -57,6 +58,21 @@
           </van-grid-item>
         </van-grid>
       </van-cell-group>
+      <div
+        v-else
+        class="no-login">
+        <div  @click="$router.push('/login')" >
+          <!--这里教师用的不是vant组件，这里用的就是image，我是为了用元脚用的vant组件-->
+          <van-image
+            class="mobile"
+            round
+            height="66"
+            width="66"
+            src="./no-loginimg.png"
+          ></van-image>
+        </div>
+        <div class="text">未登录</div>
+      </div>
       <van-grid column-num="2" class="nav-grid mb-4">
         <van-grid-item class="nav-grid-item" icon-prefix="toutiao" icon="shoucang" text="收藏" />
         <van-grid-item class="nav-grid-item" icon-prefix="toutiao" icon="lishi" text="历史" />
@@ -64,11 +80,11 @@
       <van-cell title="消息通知" is-link to="/"/>
       <van-cell class="mb-4" title="小智同学" is-link to="/" />
       <!--判断有这个本地有这个user我们就显示登录，没有就不显示-->
-      <van-cell  class="logout-cell" title="退出登录" is-link to="/" />
+      <van-cell v-if="user" class="logout-cell" title="退出登录" is-link to="/" />
     </div>
 </template>
 <script>
-
+import { mapState } from 'vuex'
     export default {
         name: 'MyIndex',
         components: {},
@@ -77,7 +93,7 @@
             return {}
         },
         computed: {
-
+          ...mapState(['user'])
         },
         watch: {},
         created () {
@@ -136,7 +152,23 @@
         background-color: unset;
       }
     }
+    .no-login{
+      background: url(./banner.png);
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      background-size: cover;
+      .mobile{
+        height: 66px;
+        width: 66px;
+      }
+      .text{
+        color: #fff;
+        font-size: 14px;
+      }
 
+    }
       /deep/.nav-grid{
         .nav-grid-item{
           height: 70px;
