@@ -130,6 +130,7 @@ import { getCurrentUser } from '@/api/user'
           }
         }
     }
+    // /deep/组件的作用域是只能作用到子组件的根结点。我们要想作用在根结里边的元素上，就要用/deep/
 </script>
 
 <style scoped lang="less">
