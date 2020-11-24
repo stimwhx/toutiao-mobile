@@ -12,23 +12,41 @@
           class="search-btn"
         >搜索</van-button>
       </van-nav-bar>
+      <van-tabs v-model="active">
+        <van-tab
+          v-for="channel in channels"
+          :title="channel.name"
+          :key="channel.id"
+        >{{channel.name}}的内容</van-tab>
+
+      </van-tabs>
     </div>
 </template>
 <script>
+  import { getChannels } from '@/api/user'
     export default {
         name: 'HomeIndex',
         components: {},
         props: {},
         data () {
-            return {}
+            return {
+              active: 0, // 控制被激活的标签
+              channels: []
+            }
         },
         computed: {},
         watch: {},
         created () {
+            this.loadChannels()
         },
         mounted () {
         },
-        methods: {}
+        methods: {
+       async   loadChannels () {
+              const{ data } = await getChannels()
+              this.channels = data.data.channels
+          }
+        }
     }
 </script>
 
