@@ -18,3 +18,14 @@ export const sendSms = mobile => {
     url: `/app/v1_0/sms/codes/${mobile}`
   })
 }
+
+// 获取用户信息
+export const getCurrentUser = () => {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/user'
+   /* headers: {
+      Authorization: `Bearer  ${store.state.user.token}`
+    }*/
+  })
+}

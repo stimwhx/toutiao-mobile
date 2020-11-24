@@ -19,12 +19,12 @@
           <div
             class="name"
             slot="title"
-          >昵称</div>
-          <van-butto
+          >{{currentUser.intro}}</div>
+          <van-button
             class="update-btn"
             round
             size="small"
-            >编辑资料</van-butto>
+            >编辑资料</van-button>
         </van-cell>
           <!--Grid 宫格-->
         <van-grid
@@ -33,26 +33,26 @@
         >
           <van-grid-item class="data-info-item" >
             <div class="text-wrap"  slot="text">
-              <div class="count">123</div>
+              <div class="count">{{currentUser.art_count}}</div>
               <div class="text">头条</div>
             </div>
           </van-grid-item>
           <van-grid-item class="data-info-item">
             <!--Slots自定义-->
             <div class="text-wrap" slot="text">
-              <div class="count">123</div>
+              <div class="count">{{currentUser.follow_count}}</div>
               <div class="text">关注</div>
             </div>
           </van-grid-item>
           <van-grid-item class="data-info-item">
             <div class="text-wrap" slot="text">
-              <div class="count">123</div>
+              <div class="count">{{currentUser.fans_count}}</div>
               <div class="text">粉丝</div>
             </div>
           </van-grid-item>
           <van-grid-item class="data-info-item" >
             <div  class="text-wrap" slot="text">
-              <div class="count">123</div>
+              <div class="count">{{currentUser.like_count}}</div>
               <div class="text">获赞</div>
             </div>
           </van-grid-item>
@@ -86,22 +86,34 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import { getCurrentUser } from '@/api/user'
     export default {
         name: 'MyIndex',
         components: {},
         props: {},
         data () {
-            return {}
+            return {
+                // 容器中引用的名字不能和组件中的名字重名。要不会报错
+              currentUser: {}
+            }
         },
         computed: {
           ...mapState(['user'])
         },
         watch: {},
         created () {
+            // 我们尽量不在这里写逻辑，都是封装在代码里
+          this.loadCurrentUser()
         },
         mounted () {
         },
         methods: {
+         async loadCurrentUser () {
+             const { data } = await getCurrentUser()
+           this.currentUser = data.data
+           // console.log(this.currentUser)
+
+          },
           onLogout () {
             this.$dialog.confirm({
               title: '退出登录',
