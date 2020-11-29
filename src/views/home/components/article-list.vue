@@ -1,5 +1,14 @@
 <template>
     <div class="article-list">
+      <!--
+      想让谁往下拉就用van-pull-refresh把这个组件给他包住
+      -->
+      <van-pull-refresh
+        v-model="isRefreshLoading"
+        :success-text="refreshSuccessText"
+        :success-duration="1500"
+        @refresh="onRefresh"
+      >
       <van-list
         v-model="loading"
         :finished="finished"
@@ -11,6 +20,7 @@
         ></van-cell>
 
       </van-list>
+      </van-pull-refresh>
     </div>
 </template>
 <script>
@@ -29,7 +39,9 @@
                 articles: [], // 数据列表
               loading: false, // 控制加载中的loading状态，不满一屏自动为true加载，为一屏后自动会设置为false
               finished: false, // 控制加载结束的状态，当加载结整，不在触发加载更多
-              timestamp: null // 获取下一页的时间戳
+              timestamp: null, // 获取下一页的时间戳
+              isRefreshLoading: false, // 下拉刷新的状态
+              refreshSuccessText: ''
             }
         },
         computed: {},
@@ -61,7 +73,24 @@
             }else {
 
             }
-            }
+            },
+          async onRefresh () {
+              // 下拉刷新，组件自己就会展示loading
+            // 1、 请求获取数据
+            const { data } = await getArticles({
+              channel_id: this.channellist.id,
+              timestamp: Date.now(),
+             // 为了方便大家学习，只要你传递不同的时间戳就一定给你返回不一样的数据，而且数据不为空。
+              with_top: 1
+            })
+              // 2、把数据放到数据列表中，因为是在上边的下拉刷新，我们要把数据放在list顶部 用unshift
+            const { results } = data.data
+            this.articles.unshift(...results)
+            // 3、关闭刷新的状态 loading
+            this.isRefreshLoading = false
+            // 4、添加更新成功提示
+            this.refreshSuccessText = `更新了${results.length}条数据`
+          }
 
         }
     }
