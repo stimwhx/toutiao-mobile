@@ -46,7 +46,7 @@
       <div class="lable-wrap">
       <span>{{article.aut_name}}</span>
       <span>{{article.comm_count}}评论数</span>
-      <span>{{article.pubdate}}</span>
+      <span>{{article.pubdate | relativeTime }}</span>
       </div>
       <!--
       这个van-cell有默认的插槽，slot="default"，可以省略不写可以省略不给image加，默认的就是这个

@@ -10,6 +10,8 @@ import 'vant/lib/index.css'
 import './styles/index.less'
 // 自动设置rem 基准值，就是HTML标签字体大小，这个是在html标签上style上看的，切换手机型号可以看到变化
 import 'amfe-flexible'
+// 加载时间
+import './utile/dayjs'
 // 注册全局vant中的组件
 Vue.use(Vant)
 Vue.config.productionTip = false
