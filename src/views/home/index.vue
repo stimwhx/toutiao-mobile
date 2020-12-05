@@ -48,9 +48,12 @@
         closeable
         close-icon-position="top-left"
         get-container="body"
-        :style="{ height: '100%' }" >
+        :style="{ height: '100%' }"
+      >
+        <!-- 我们在引用子组件处去触发子组件中用$emit声明的方法-->
         <channel-edit
           :user-channels="channels"
+          @close="isChannelEditShow = false"
         ></channel-edit>
       </van-popup>
     </div>

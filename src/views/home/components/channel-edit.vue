@@ -96,6 +96,8 @@
              this.userChannels.splice(index, 1)
           },
           switchChannel (index) {
+             // 在子组件中用$emit声明我们要让父组件监听的方法
+             this.$emit('close')
              console.log(index)
           }
         }
@@ -114,6 +116,7 @@
       height: 43px;
       /deep/.van-grid-item__content {
         background-color: #f4f5f6;
+        border: none;
         .van-grid-item__text {
           font-size: 14px;
           color: #222;
