@@ -50,10 +50,14 @@
         get-container="body"
         :style="{ height: '100%' }"
       >
-        <!-- 我们在引用子组件处去触发子组件中用$emit声明的方法-->
+        <!-- 我们在引用子组件处去触发子组件中用$emit声明的方法
+        $event就是你传的参数
+        -->
         <channel-edit
           :user-channels="channels"
+          :active="active"
           @close="isChannelEditShow = false"
+          @update-active="active = $event"
         ></channel-edit>
       </van-popup>
     </div>
@@ -62,6 +66,8 @@
   import { getChannels } from '@/api/user'
   import ArticleList from './components/article-list'
   import ChannelEdit from './components/channel-edit'
+  import { mapState } from 'vuex'
+  import { getItem } from '@/utile/storage'
     export default {
         name: 'HomeIndex',
         components: {
@@ -73,10 +79,12 @@
             return {
               active: 0, // 控制被激活的标签
               channels: [],
-              isChannelEditShow: true // 控制频道层是否显示
+              isChannelEditShow: false // 控制频道层是否显示
             }
         },
-        computed: {},
+        computed: {
+          ...mapState(['user'])
+        },
         watch: {},
         created () {
             this.loadChannels()
@@ -85,8 +93,27 @@
         },
         methods: {
        async   loadChannels () {
-              const{ data } = await getChannels()
-              this.channels = data.data.channels
+              /*const{ data } = await getChannels()
+              this.channels = data.data.channels*/
+              let channels = []
+              if (this.user) {
+                  // 已登录，请求获取线上的用户频道列表数据
+                const{ data } = await getChannels()
+                channels = data.data.channels
+              } else {
+                  // 没有登录, 判断是否有本地存储的频道列表数据
+                  const localChannels = getItem('user-channels')
+                // 如果有本地存储的频道列表，则使用
+                if (localChannels) {
+                      channels = localChannels
+                } else {
+                      // 用户没有登录，也没有本地存储的频道，那就请求获取默认推荐的频道列表
+                  const{ data } = await getChannels()
+                  channels = data.data.channels
+                }
+              }
+              // 把处理好的数据放到data中以供后边模板使用
+              this.channels = channels
           }
         }
     }
