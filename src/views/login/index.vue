@@ -154,7 +154,6 @@ export default {
       try {
         await this.$refs['login-form'].validate('mobile')
          const res = await sendSms(this.user.mobile)
-         console.log(res)
         this.isDowncount = true
       } catch (err) {
           // 1、定义一个供用的 message消息，然后去判断不同的错误类型。去给这个message 负值。最后才去弹出toast提示

@@ -74,7 +74,6 @@
             // 2、把数据放到 articles这个数组里，注意我们要把一个数组放在别一个数组里的写方法 加。。。
             // 有了这个相当于我们把这个results里数组的每一项都展开了放在了articles里。
             const { results } = data.data
-            console.log(results)
             this.articles.push(...results)
             // 3、设置本次加载状态结束，它才可以判断是否需要加载下一次，否则就会永远的停在这里
             this.loading = false

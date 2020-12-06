@@ -15,7 +15,10 @@
       />
       </form>
       <!-- 搜索结果 -->
-      <search-result v-if="isResultShow"/>
+      <search-result
+        v-if="isResultShow"
+        :search-text="searchText"
+      />
       <!-- /搜索结果 -->
 
       <!-- /搜索 -->
