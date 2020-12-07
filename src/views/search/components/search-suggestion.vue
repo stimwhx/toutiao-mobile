@@ -9,6 +9,7 @@
         icon="search"
         v-for="(str, index) in suggestions"
         :key="index"
+        @click="$emit('search', str)"
       >
         <!-- 我们要使用v-html这个指令得在html的标签上。所以我们把van-cell里的：title="str"以插槽的形式展示-->
         <div slot="title" v-html="highlight(str)"></div>
