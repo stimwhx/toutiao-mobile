@@ -40,6 +40,8 @@
       <search-history
         v-else
         :searchHistories="searchHistories"
+        @search="onSearch"
+        @updata-histories="searchHistories = $event"
       />
       <!-- /历史记录 -->
 
@@ -70,7 +72,12 @@
         computed: {
           ...mapState(['user'])
         },
-        watch: {},
+        watch: {
+            // 我们在这里监视，只要是这个数据有变像我们就更新本地存储。  可以把父子组件的相同的内容注释掉了就
+          searchHistories () {
+            setItem('search-histories', this.searchHistories)
+          }
+        },
         created () {
             this.loadSearchHistories()
         },
@@ -82,7 +89,7 @@
               this.searchText = serchTextarg
             // 实现我们搜索后，把我们搜索过的文本放在历史记录列表里
             // 1、 去搜索一下历史记录里是不是有我们这个结果
-            const index = this.searchHistories.indexOf()
+            const index = this.searchHistories.indexOf(serchTextarg)
             // 2、看这个index 是不是存在。 如果存在就删除之前存放的。把这个新的存放在顶上
             if (index !== -1) {
                   // 不等于负1，说明以存在，我们要删除
@@ -94,7 +101,7 @@
               // 点击搜索后，显示结果列表
             this.isResultShow = true
             // 搜索的同时，放到本地存储。用户如果在线，我们一边搜索后，后台会给我们存的。
-            setItem('search-histories', this.searchHistories)
+            //  setItem('search-histories', this.searchHistories)
           },
           /*onCancel () {
           如果不用$router.back()可以在这里实现调用方法跳回到取消前界面
