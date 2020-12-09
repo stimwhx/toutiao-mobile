@@ -6,6 +6,12 @@
       文章列表</div>-->
   <van-cell
   class="article-item"
+  :to="{
+    name: 'article',
+    params: {
+        articleId: article.art_id
+    }
+  }"
   >
     <!-- van 提供了加载多少行然后省略，我们可以直接给用他的类名就可以用。van-multi-ellipsis--l3
     内置样式
