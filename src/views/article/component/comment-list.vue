@@ -51,14 +51,26 @@
                   aut_id: 1,
                 aut_name: '王洪晓',
                 aut_photo: 'https://img.yzcdn.cn/vant/cat.jpeg',
-                com_id: Object,
+                com_id: { c: [2, 6], e: 12, s: 18},
                 content: '啊啊啊啊啊啊啊',
                 is_liking: false,
                 is_top: 0,
                 like_count: 12,
                 pubdate: '2020-05-01 22:59:23',
                 reply_count: 18
-              }]
+              },
+                {
+                  aut_id: 2,
+                  aut_name: '张盼召',
+                  aut_photo: 'https://img.yzcdn.cn/vant/cat.jpeg',
+                  com_id: { c: [1, 5], e: 10, s: 1},
+                  content: '很开心还在坚持',
+                  is_liking: true,
+                  is_top: 0,
+                  like_count: 10,
+                  pubdate: '2020-05-01 22:59:23',
+                  reply_count: 1
+                }]
             // 加载状态结束
             this.loading = false
 
