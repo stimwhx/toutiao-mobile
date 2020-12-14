@@ -49,6 +49,7 @@
         type="default"
         round
         size="small"
+        @click="isPostShow = true"
         >写评论</van-button>
         <van-icon
         name="comment-o"
@@ -65,8 +66,19 @@
           :name="article.arttitude === 1 ? 'good-job' : 'good-job-o'"
           @click="onLike"
         />
-        <van-icon name="share" color="#777777"></van-icon>
+        <!--<van-icon name="share" color="#777777"></van-icon>-->
       </div>
+      <!-- 发布评论
+      不加:style="{ height: '30%' }"自动由内容称开弹出层
+      -->
+      <van-popup
+        v-model="isPostShow"
+        position="bottom"
+      >
+        hello world
+      </van-popup>
+      <!-- 发布评论-->
+
     </div>
 </template>
 <script>
@@ -100,7 +112,8 @@
         data () {
             return {
                 article: {}, // 文章详情
-              isFollowloading: false
+              isFollowloading: false,
+              isPostShow: false
             }
         },
         computed: {},
@@ -243,8 +256,8 @@
     align-items: center;
     position: fixed;
     bottom: 0px;
-    width:100%;
-    h
+    width:90%;
+    height: 34px;
     padding-right: 15px;
     padding-left: 15px;
     background-color: #fff;
