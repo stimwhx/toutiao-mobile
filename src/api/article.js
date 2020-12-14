@@ -23,3 +23,48 @@ export const getArticleById = articleId => {
     url: `/app/v1_0/articles/${articleId}`
   })
 }
+
+/**
+ * 收藏
+ */
+export const addCollect = collectId => {
+  return request({
+    method: 'POST',
+    url: '/app/v1_0/article/collections',
+    data: {
+      target: collectId
+    }
+  })
+}
+
+/**
+ * 取消收藏
+ */
+export const deleteCollect = collectId => {
+  return request({
+    method: 'DELETE',
+    url: `/app/v1_0/article/collections/${collectId}`
+  })
+}
+/**
+ * 点赞
+ */
+export const addLink = collectId => {
+  return request({
+    method: 'POST',
+    url: '/app/v1_0/article/likings',
+    data: {
+      target: collectId
+    }
+  })
+}
+
+/**
+ * 取消点赞
+ */
+export const deleteLink = collectId => {
+  return request({
+    method: 'DELETE',
+    url: `/app/v1_0/article/likings/${collectId}`
+  })
+}

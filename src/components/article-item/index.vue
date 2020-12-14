@@ -18,7 +18,7 @@
     -->
     <div slot="title"
          class="title van-multi-ellipsis--l3"
-    >这是一个俱俱俱hwhwhwhhwhhkdsfj顺dksldk害在国这是一个俱俱俱hwhwhwhhwhhkdsfj顺dksldk害在国这是一个俱俱俱hwhwhwhhwhhkdsfj顺dksldk害在国这是一个俱俱俱hwhwhwhhwhhkdsfj顺dksldk害在国这是一个俱俱俱hwhwhwhhwhhkdsfj顺dksldk害在国</div>
+    >{{ article.title }}</div>
     <van-image
       v-if="article.cover.type === 1"
       fit="cover"

@@ -12,6 +12,7 @@ import './styles/index.less'
 import 'amfe-flexible'
 // 加载时间
 import './utile/dayjs'
+Vue.config.devtools = true
 // 注册全局vant中的组件
 Vue.use(Vant)
 Vue.config.productionTip = false
