@@ -11,7 +11,7 @@
         v-for="(comment, index) in list"
         :key="index"
         :comment="comment"
-        />
+       />
         <!--van-cell v-for="item in list" :key="item" :title="item" />-->
       </van-list>
     </div>
@@ -28,11 +28,16 @@
           source: {
                 type: [Number, String, Object],
               required: true
-            }
+            },
+          list: {
+              // 数组和对象的接收必须是用函数接收
+            type: Array,
+            default: () => []
+          }
         },
         data () {
             return {
-              list: [],
+             // list: [],
               loading: false,
               finished: false,
               offset: null,

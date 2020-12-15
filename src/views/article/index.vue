@@ -40,6 +40,7 @@
         <!-- 文章评论列表 -->
         <comment-list
           :source="articleId"
+          :list="commentList"
         />
       </div>
       <div class="article-bottom"
@@ -75,7 +76,10 @@
         v-model="isPostShow"
         position="bottom"
       >
-        hello world
+        <post-comment
+          :target="articleId"
+          @post-success="onPostSuccess"
+        />
       </van-popup>
       <!-- 发布评论-->
 
@@ -94,10 +98,12 @@
   // 这个要单独引用
   import { ImagePreview } from 'vant'
   import CommentList from './component/comment-list'
+  import PostComment from './component/post-comment'
     export default {
         name: 'ArticleIndex',
         components: {
-          CommentList
+          CommentList,
+          PostComment
         },
       // 在组件中动太获取路由参数的方法有两种
       // 方式一： this.$route.params.articleID
@@ -113,7 +119,8 @@
             return {
                 article: {}, // 文章详情
               isFollowloading: false,
-              isPostShow: false
+              isPostShow: false,
+              commentList: []
             }
         },
         computed: {},
@@ -202,6 +209,11 @@
               this.article.attitude = 1
             }
             this.$toast.success(`${this.article.is_collected ? '' : '取消'}点赞成功`)
+          },
+          onPostSuccess (comment) {
+              this.commentList.unshift(comment)
+              this.isPostShow = false
+              console.log(comment)
           }
         }
     }
