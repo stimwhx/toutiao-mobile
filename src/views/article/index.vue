@@ -41,6 +41,7 @@
         <comment-list
           :source="articleId"
           :list="commentList"
+          @update-comment-count="totalCommentCount = $event"
         />
       </div>
       <div class="article-bottom"
@@ -54,7 +55,7 @@
         >写评论</van-button>
         <van-icon
         name="comment-o"
-        info="123"
+        :info="totalCommentCount"
         color="#777"
         />
         <van-icon
@@ -119,8 +120,9 @@
             return {
                 article: {}, // 文章详情
               isFollowloading: false,
-              isPostShow: false,
-              commentList: []
+              isPostShow: false, // 控制发布评论的显示状态
+              commentList: [], // 文章评论列表
+              totalCommentCount: 0 // 评论总数据量
             }
         },
         computed: {},
@@ -211,7 +213,11 @@
             this.$toast.success(`${this.article.is_collected ? '' : '取消'}点赞成功`)
           },
           onPostSuccess (comment) {
+              // 把发布成功的评论数据对象放到评论的顶部
               this.commentList.unshift(comment)
+            // 更新评论的总数量
+            this.totalCommentCount++
+            // 关闭发布的弹出层
               this.isPostShow = false
               console.log(comment)
           }

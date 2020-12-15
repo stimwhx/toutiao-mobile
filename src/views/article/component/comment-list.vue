@@ -83,6 +83,7 @@
             if (this.list.length >= 40) {
               this.finished = true
             }
+            this.$emit('update-comment-count', 192)
           }
             /*// 异步更新数据
             // setTimeout 仅做示例，真实场景中一般为 ajax 请求
