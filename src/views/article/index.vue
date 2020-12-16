@@ -38,10 +38,12 @@
         >
         </div>
         <!-- 文章评论列表 -->
+        <!-- 在comment-list的父组件中，对点击回复的按钮给出响应-->
         <comment-list
           :source="articleId"
           :list="commentList"
           @update-comment-count="totalCommentCount = $event"
+          @reply-comment="onReplyClick"
         />
       </div>
       <div class="article-bottom"
@@ -83,7 +85,14 @@
         />
       </van-popup>
       <!-- 发布评论-->
-
+      <!-- 评论的回复 -->
+      <van-popup
+        v-model="isReplyShow"
+        position="bottom"
+      >
+        评论的回复
+      </van-popup>
+      <!-- /评论的回复 -->
     </div>
 </template>
 <script>
@@ -122,7 +131,8 @@
               isFollowloading: false,
               isPostShow: false, // 控制发布评论的显示状态
               commentList: [], // 文章评论列表
-              totalCommentCount: 0 // 评论总数据量
+              totalCommentCount: 0, // 评论总数据量
+              isReplyShow: false // 评论的回复是否展示
             }
         },
         computed: {},
@@ -220,6 +230,11 @@
             // 关闭发布的弹出层
               this.isPostShow = false
               console.log(comment)
+          },
+          onReplyClick (comment) {
+              console.log('ononReplyClick', comment)
+            // 展示回复弹框
+            this.isReplyShow = true
           }
         }
     }

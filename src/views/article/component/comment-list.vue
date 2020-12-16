@@ -7,10 +7,12 @@
         @load="onLoad"
       >
         <van-cell>全部评论</van-cell>
+        <!-- 我们这个父组件接收到了，接着往上抛 这里是接收子组件给的内容用的是$event-->
         <comment-item
         v-for="(comment, index) in list"
         :key="index"
         :comment="comment"
+        @reply-comment="$emit('reply-comment', $event)"
        />
         <!--van-cell v-for="item in list" :key="item" :title="item" />-->
       </van-list>
