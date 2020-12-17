@@ -47,7 +47,7 @@
         methods: {
             async onPost () {
                 this.$toast.loading({
-                  message: '加载中～～～～',
+                  message: '加载中～～～',
                   forbidClick: true //禁止背景点击
                 })
                 const { data } = await addComment({

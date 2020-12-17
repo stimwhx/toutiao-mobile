@@ -90,7 +90,12 @@
         v-model="isReplyShow"
         position="bottom"
       >
-        评论的回复
+        <comment-reply
+          v-if="isReplyShow"
+        @close="isReplyShow = false"
+          :article-id="articleId"
+        :comment="replyComment"
+        />
       </van-popup>
       <!-- /评论的回复 -->
     </div>
@@ -109,11 +114,13 @@
   import { ImagePreview } from 'vant'
   import CommentList from './component/comment-list'
   import PostComment from './component/post-comment'
+  import CommentReply from './component/comment-reply'
     export default {
         name: 'ArticleIndex',
         components: {
           CommentList,
-          PostComment
+          PostComment,
+          CommentReply
         },
       // 在组件中动太获取路由参数的方法有两种
       // 方式一： this.$route.params.articleID
@@ -132,7 +139,8 @@
               isPostShow: false, // 控制发布评论的显示状态
               commentList: [], // 文章评论列表
               totalCommentCount: 0, // 评论总数据量
-              isReplyShow: false // 评论的回复是否展示
+              isReplyShow: false, // 评论的回复是否展示
+              replyComment: {} // 这是拿到评论项
             }
         },
         computed: {},
@@ -229,10 +237,11 @@
             this.totalCommentCount++
             // 关闭发布的弹出层
               this.isPostShow = false
-              console.log(comment)
+             // console.log(comment)
           },
           onReplyClick (comment) {
-              console.log('ononReplyClick', comment)
+              this.replyComment = comment
+              //console.log('ononReplyClick', comment)
             // 展示回复弹框
             this.isReplyShow = true
           }
@@ -285,16 +294,23 @@
   }
   .article-bottom{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    position: fixed;
     bottom: 0px;
-    width:90%;
-    height: 34px;
-    padding-right: 15px;
-    padding-left: 15px;
+    left: 0px;
+    right: 0px;
+    box-sizing: border-box;
+    height: 44px;
     background-color: #fff;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border-top: 1px solid #d8d8d8;
+    position: fixed;
+    .comment-btn {
+      width: 141px;
+      height: 23px;
+      border: 1px solid #eeeeee;
+      font-size: 15px;
+      line-height: 23px;
+      color: #a7a7a7
+    }
   }
 </style>
