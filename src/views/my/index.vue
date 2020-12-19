@@ -24,6 +24,7 @@
             class="update-btn"
             round
             size="small"
+            to="/user/profile"
             >编辑资料</van-button>
         </van-cell>
           <!--Grid 宫格-->

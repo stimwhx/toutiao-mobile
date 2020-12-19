@@ -2,9 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
+// 路由懒加载
 
 const routes = [
-  // 路由懒加载
   {
     path: '/login',
     name: 'login',
@@ -48,6 +48,11 @@ const routes = [
     component: () => import('@/views/article/'),
     // 将动态路由参数映射到组件的props中，无论是访问还是维护性都很方便：
     props: true
+  },
+  {
+    path: '/user/profile',
+    name: 'user-profile',
+    component: () => import('@/views/user-profile')
   }
 ]
 
