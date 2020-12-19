@@ -17,8 +17,14 @@
           :src="user.photo" />
       </van-cell>
       <van-cell title="昵称" is-link :value="user.name" @click="isEditNameShow = true"></van-cell>
-      <van-cell title="性别" is-link :value="user.gender === 0 ? '男' : '女'"></van-cell>
-      <van-cell title="生日" is-link :value="user.birthday"></van-cell>
+      <van-cell title="性别" is-link
+                :value="user.gender === 0 ? '男' : '女'"
+                @click="isEidtGenderShow = true"
+      ></van-cell>
+      <van-cell title="生日" is-link
+                :value="user.birthday"
+                @click="isEidtBirthdayShow = true"
+      ></van-cell>
       <van-popup
         v-model="isEditNameShow"
         position="bottom"
@@ -48,9 +54,36 @@
         注意：语法update:属性名
         属性名是你在props里声名接收的那个名字
         -->
+        <!--
+        我们一般把最常用的数据设计为v-model绑定，把不常用的用.sync绑定
+        -->
         <update-name
           @close="isEditNameShow = false"
           v-model="user.name"
+          v-if="isEditNameShow"
+        />
+      </van-popup>
+      <van-popup
+        v-model="isEidtGenderShow"
+        position="bottom"
+        class="popupCss"
+      >
+        <updata-gender
+        v-model="user.gender"
+        @close="isEidtGenderShow = false"
+        v-if="isEidtGenderShow"
+        />
+      </van-popup>
+      <!--修改生日-->
+      <van-popup
+        v-model="isEidtBirthdayShow"
+        position="bottom"
+        class="popupCss"
+      >
+        <update-birthday
+          v-model="user.birthday"
+          @close="isEidtBirthdayShow = false"
+          v-if="isEidtBirthdayShow"
         />
       </van-popup>
     </div>
@@ -58,16 +91,22 @@
 <script>
   import { getUserInfo } from '@/api/user'
   import UpdateName from './component/update-name'
+  import UpdataGender from './component/updata-gender'
+  import UpdateBirthday from './component/update-birthday'
     export default {
         name: 'UserProfile',
         components: {
-          UpdateName
+          UpdateName,
+          UpdataGender,
+          UpdateBirthday
         },
         props: {},
         data () {
             return {
                 user: {}, // 用户个人信息对象
-              isEditNameShow: false
+              isEditNameShow: false,
+              isEidtGenderShow: false,
+              isEidtBirthdayShow: false
             }
         },
         computed: {},
